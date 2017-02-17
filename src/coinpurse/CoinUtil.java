@@ -22,7 +22,7 @@ public class CoinUtil {
 	 * @return a new List containing only the elements from monetarylist that have
 	 *         the requested currency.
 	 */
-	public static List<Valuable> filterByCurrency(final List<Valuable> monetarylist, String currency) {
+	public static List<Valuable> filterByCurrency(final List<? extends Valuable> monetarylist, String currency) {
 		List<Valuable> vals = new ArrayList<Valuable>();
 		for (Valuable vallist : monetarylist) {
 			if (vallist.getCurrency().equals(currency)) {
@@ -39,7 +39,7 @@ public class CoinUtil {
 	 * @param monetaryObjs
 	 *            is a List of monetary objects we want to sort.
 	 */
-	public static void sortByCurrency(List<Valuable> monetaryObjs) {
+	public static void sortByCurrency(List<? extends Valuable> monetaryObjs) {
 		Collections.sort(monetaryObjs, new CompareByCurrency());
 	}
 
@@ -50,7 +50,7 @@ public class CoinUtil {
 	 * @param vals
 	 *            is a List of monetary objects we want to sum.
 	 */
-	public static void sumByCurrency(List<Valuable> vals) {
+	public static void sumByCurrency(List<? extends Valuable> vals) {
 		Map<String, Double> hash = new HashMap<String, Double>();
 		for (Valuable val : vals) {
 			hash.put(val.getCurrency(), hash.getOrDefault(val.getCurrency(), 0.0) + val.getValue());
