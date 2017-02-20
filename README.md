@@ -5,10 +5,17 @@ CoinPurse has UI allow the user to deposit and withdraw their money from their p
 * Main class use for starting the application.
 * Purse class is a coin purse contains coins. You can insert coins, withdraw money, check the balance, and check if the purse is full. When you withdraw money, the coin purse decides which coins to remove.
 
-**And some other classes.**
+And some other classes.
 * CoinUtil class has some Coin utility methods for practice using Lists and Comparator.
 	- filterByCurrency method
 	- sortByCurrency method
 	- sumByCurrenc method
 * CompareByCurrency class is compare coin class which use in 'sortByCurrency' method in CoinUtil class.
 * PurseTest class use JUnit for testing Purse class.
+
+Finish Lab3
+*****
+Lab4 on 17 Feb 2017
+* The purse can add more kind of monetary objects. Example is BankNote class.
+* Created an interface, Valuable interface for getting value and currency of monetory objects.
+* Pratice using polymorphism.
