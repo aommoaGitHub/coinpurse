@@ -2,11 +2,12 @@ package coinpurse;
 
 /**
  * Valuable interface for getting value and currency
+ * It implements Comparable so AbstarctValuable can override compareTo method.
  * 
  * @author Vittunyuta Maeprasart
  *
  */
-public interface Valuable {
+public interface Valuable extends Comparable<Valuable>{
 	/**
 	 * Get the monetary value of this object, in its own currency.
 	 * 

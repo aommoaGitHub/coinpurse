@@ -5,12 +5,11 @@ package coinpurse;
  * 
  * @author Vittunyuta Maeprasart
  */
-public class Coin implements Comparable<Coin>, Valuable {
+public class Coin extends AbstractValuable{
 	public static final String DEFAULT_CURRENCY = "Baht";
-	/** Value of the coin. */
-	private final double value;
-	/** The currency, of course. */
-	private final String currency;
+	
+	private String printCurrency;
+	private double printValue;
 
 	/**
 	 * A coin with given value using the default currency.
@@ -19,8 +18,7 @@ public class Coin implements Comparable<Coin>, Valuable {
 	 *            of this coin
 	 */
 	public Coin(double value) {
-		this.value = value;
-		this.currency = DEFAULT_CURRENCY;
+		this(value, DEFAULT_CURRENCY);
 	}
 
 	/**
@@ -32,72 +30,27 @@ public class Coin implements Comparable<Coin>, Valuable {
 	 *            of this coin
 	 */
 	public Coin(double value, String currency) {
-		this.value = value;
-		this.currency = currency;
+		super(value, currency);
+		this.printCurrency = currency;
+		this.printValue = value;
 	}
 
 	/**
-	 * get value of this coin
+	 * set currency for printing of this coin
 	 * 
-	 * @return this coin's value
+	 * @param printCurrency is currency for printing
 	 */
-	@Override
-	public double getValue() {
-		return this.value;
+	public void setDescription(double printValue, String printCurrency) {
+		this.printValue = printValue;
+		this.printCurrency = printCurrency;
 	}
-
-	/**
-	 * get currency of this coin
-	 * 
-	 * @return this coin's currency
-	 */
-	@Override
-	public String getCurrency() {
-		return this.currency;
-	}
-
-	/**
-	 * checking 2 coins are the same or not
-	 * 
-	 * @param obj
-	 *            is another coin
-	 * @return true when 2 coins are the same in both value and currency,
-	 *         otherwise return false
-	 */
-	public boolean equals(Object obj) {
-		if (obj == null)
-			return false;
-		if (obj.getClass() != this.getClass())
-			return false;
-		Coin c = (Coin) obj;
-		if ((c.value == this.value) && (c.currency.equals(this.currency)))
-			return true;
-		return false;
-	}
-
-	/**
-	 * Comparing 2 coins by value
-	 * 
-	 * @param o
-	 *            is another coin
-	 * @return -1 if this coin has less value<br>
-	 *         0 if they have same value<br>
-	 *         1 if this coin has more value
-	 * 
-	 */
-	@Override
-	public int compareTo(Coin o) {
-		if (o == null)
-			return -1;
-		return (int) Math.signum(this.value - o.value);
-	}
-
+	
 	/**
 	 * The description of this coin
 	 * @return this coin's description
 	 */
 	public String toString() {
-		return this.value + "-" + this.currency;
+		return String.format("%.0f-%s",this.printValue,this.printCurrency);
 	}
 
 }

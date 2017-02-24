@@ -1,5 +1,5 @@
 package coinpurse;
- 
+
 import java.util.Scanner;
 
 /** 
@@ -29,7 +29,7 @@ public class ConsoleDialog {
     
     /** run the user interface */
     public void run() {
-        String choice = "";
+		String choice = "";
         while( true ) {
             System.out.printf("Purse contains %.2f %s\n", purse.getBalance(), CURRENCY );
             if ( purse.isFull() ) System.out.println("Purse is FULL.");
@@ -54,17 +54,19 @@ public class ConsoleDialog {
     public void depositDialog() {
         System.out.print("Enter value of monetary object(s) to deposit on one line [eg: 20 5 5 1]: ");
         String inline = console.nextLine();
-        Valuable val;
+        Valuable valuable;
         // parse input line into numbers
         Scanner scanline = new Scanner(inline);
         while( scanline.hasNextDouble() ) {
-            double value = scanline.nextDouble();
-            if(value >= 20)
-            	val = new Banknote(value);
-            else
-            	val = new Coin(value);
-            System.out.printf("Deposit %s... ", val.toString() );
-            boolean ok = purse.insert(val);
+            String amount = scanline.next();
+            try {
+				valuable = MoneyFactory.getInstance().createMoney(amount);
+			} catch (IllegalAccessException e) {
+				System.out.println("Sorry, "+amount+"is not a valid amount");
+				continue;
+			}
+            System.out.printf("Deposit %s... ", valuable.toString() );
+            boolean ok = purse.insert(valuable);
             System.out.println( (ok? "ok" : "FAILED") );
         }
         if ( scanline.hasNext() )
