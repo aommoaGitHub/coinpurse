@@ -131,14 +131,10 @@ public class Purse {
 		// Remove the monetary objects you want to withdraw from purse,
 		// and return them as an array.
 		for (Valuable tem : templist) {
-			for (int i = 0; i < count(); i++) {
-				if (tem.equals(this.money.get(i))) {
-					this.balance -= this.money.get(i).getValue();
-					this.money.remove(i);
-					break;
-				}
-			}
+			this.money.remove(tem);
+			this.balance -= tem.getValue();
 		}
+		
 		Valuable[] arrayMonetary = new Valuable[templist.size()];
 		templist.toArray(arrayMonetary);
 		return arrayMonetary; 

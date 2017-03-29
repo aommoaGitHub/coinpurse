@@ -26,13 +26,14 @@ public class AbstractValuable implements Valuable {
 
 	/**
 	 * Comparing 2 valuable objects by value
-	 * 
+	 * Order 2 valuable by value so that the similar come first
 	 * @param o
 	 *            is another coin
 	 * @return -1 if this coin has less value<br>
 	 *         0 if they have same value<br>
 	 *         1 if this coin has more value
-	 * 
+	 *         
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override
 	public int compareTo(Valuable val) {
@@ -63,9 +64,7 @@ public class AbstractValuable implements Valuable {
 	}
 
 	/**
-	 * get value of this valuable object
-	 * 
-	 * @return this objects's value
+	 * @see coinpurse.Valuable#getValue()
 	 */
 	@Override
 	public double getValue() {
@@ -73,9 +72,7 @@ public class AbstractValuable implements Valuable {
 	}
 
 	/**
-	 * get currency of this object
-	 * 
-	 * @return this object's currency
+	 * @see coinpurse.Valuable#getCurrency()
 	 */
 	@Override
 	public String getCurrency() {
