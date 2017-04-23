@@ -3,6 +3,7 @@ package coinpurse;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * A purse contains coins and bank notes. You can insert them, withdraw money, check the
@@ -10,7 +11,7 @@ import java.util.List;
  * 
  * @author Vittunyuta Maeprasart
  */
-public class Purse {
+public class Purse extends Observable {
 	/** Collection of objects in the purse. */
 	private List<Valuable> money;
 
@@ -94,11 +95,16 @@ public class Purse {
 			if (val.getValue() >= this.money.get(i).getValue()) {
 				this.money.add(i, val);
 				this.balance += val.getValue();
+				setChanged();
+				notifyObservers("deposit " + val.getValue());//*******************
 				return true;
 			}
 		}
 		this.money.add(val);
 		this.balance += val.getValue();
+		setChanged();
+		notifyObservers("Deposit " + val.getValue());//*******************
+
 		return true;
 	}
 
@@ -135,6 +141,8 @@ public class Purse {
 			this.balance -= tem.getValue();
 		}
 		
+		setChanged();
+		notifyObservers("Windraw " + amount);
 		Valuable[] arrayMonetary = new Valuable[templist.size()];
 		templist.toArray(arrayMonetary);
 		return arrayMonetary; 
@@ -148,5 +156,7 @@ public class Purse {
 		return count() + " items with value " + this.balance;
 	}
 	
-	
+	public List<Valuable> immutableList(){
+		return Collections.unmodifiableList(money);
+	}
 }

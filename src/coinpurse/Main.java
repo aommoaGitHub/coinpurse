@@ -2,6 +2,11 @@ package coinpurse;
 
 import java.util.ResourceBundle;
 
+import gui.PurseBalanceObserver;
+import gui.PurseListModel;
+import gui.PurseStatusObserver;
+import gui.PurseTransactionsTable;
+
 /**
  * A main class to create objects and connect objects together.
  * The user interface needs a reference to coin purse.
@@ -33,12 +38,25 @@ public class Main{
 		else {
 			MoneyFactory.setMoneyFactory(theMoneyFactory);
 		}
-    	
-        // 1. create a Purse
+		
+    // 1. create a Purse
     	Purse purse = new Purse(CAPACITY);
-        // 2. create a ConsoleDialog with a reference to the Purse object
+    // 2. add observer
+    	PurseBalanceObserver balanceObserver = new PurseBalanceObserver();
+    	purse.addObserver(balanceObserver);
+    	PurseStatusObserver statusObserver = new PurseStatusObserver();
+    	purse.addObserver(statusObserver);
+    	PurseListModel purseListModel = new PurseListModel(purse);
+    	purse.addObserver(purseListModel);
+    	PurseTransactionsTable purseTransactionsTable = new PurseTransactionsTable(purse);
+    	purse.addObserver(purseTransactionsTable);
+    // 3. create a ConsoleDialog with a reference to the Purse object
     	ConsoleDialog ui = new ConsoleDialog(purse);
-        // 3. run the ConsoleDialog
+    // 4. run the ConsoleDialog
+    	balanceObserver.run();
+    	statusObserver.run();
+    	purseListModel.run();
+    	purseTransactionsTable.run();
     	ui.run();
 
  
