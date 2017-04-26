@@ -18,6 +18,9 @@ import org.junit.Test;
 public class PurseTest {
 	/** tolerance for comparing two double values */
 	private static final double TOL = 1.0E-6;
+	/** tolerance for comparing two double values */
+	private static final String CURRENCY = "Baht";
+	
     /**
      * Sets up the test fixture.
      * Called before every test case method.
@@ -25,7 +28,6 @@ public class PurseTest {
     @Before
     public void setUp()
     {
-    	
     }
     
 
@@ -33,7 +35,7 @@ public class PurseTest {
     @Test
     public void testConstructor()
     {
-        Purse purse = new Purse(3);
+    	Purse purse = new Purse(3,CURRENCY);
         assertEquals(3, purse.getCapacity());
         assertEquals(false, purse.isFull());
         assertEquals(0, purse.count());
@@ -45,7 +47,7 @@ public class PurseTest {
     @Test
     public void testInsert()
     {
-        Purse purse = new Purse(3);
+    	Purse purse = new Purse(3,CURRENCY);
         Coin coin1 = new Coin(5);
         Coin coin2 = new Coin(10);
         Coin coin3 = new Coin(1);
@@ -62,7 +64,7 @@ public class PurseTest {
     @Test
     public void testInsertNoValue()
     {
-        Purse purse = new Purse(3);
+    	Purse purse = new Purse(3,CURRENCY);
         Coin fakeCoin = new Coin(0);
         assertFalse( purse.insert(fakeCoin));
     }
@@ -71,13 +73,13 @@ public class PurseTest {
     @Test
     public void testIsFull()
     {   // borderline case (capacity 1)
-        Purse purse = new Purse(1);
+        Purse purse = new Purse(1,CURRENCY);
         assertFalse( purse.isFull() );
         purse.insert( new Coin(1) );
         assertTrue( purse.isFull() );
         // real test
         int capacity = 4;
-        purse = new Purse(capacity);
+        purse = new Purse(capacity,CURRENCY);
         for(int k=1; k<=capacity; k++) {
             assertFalse(purse.isFull());
             purse.insert( new Coin(k) );
@@ -93,7 +95,7 @@ public class PurseTest {
 	@Test
 	public void testInsertSameCoin()
 	{
-		Purse purse = new Purse(5);
+		Purse purse = new Purse(5,CURRENCY);
 		Coin coin = new Coin(10);
 		assertTrue( purse.insert(coin) );
 		assertTrue( purse.insert(coin) ); // should be allowed
@@ -102,7 +104,7 @@ public class PurseTest {
 
 	@Test
 	public void testEasyWithdraw() {
-		Purse purse = new Purse(10);
+		Purse purse = new Purse(10,CURRENCY);
 		int [] values = {1, 10, 1000};
 		for(int value : values) {
 			Coin coin = new Coin(value);
@@ -119,7 +121,7 @@ public class PurseTest {
 
 	@Test
 	public void testMultiWithdraw() {
-		Purse purse = new Purse(10);
+		Purse purse = new Purse(10,CURRENCY);
 		int value = 1;
 		double amount1 = 0;
 		double amount2 = 0;
@@ -142,7 +144,7 @@ public class PurseTest {
 
 	@Test
 	public void testImpossibleWithdraw() {
-		Purse purse = new Purse(10);
+		Purse purse = new Purse(10,CURRENCY);
 		assertNull( purse.withdraw(1) );
 		purse.insert( new Coin(20) );
 		assertNull( purse.withdraw(1) );

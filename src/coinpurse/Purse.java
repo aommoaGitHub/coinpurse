@@ -24,14 +24,19 @@ public class Purse extends Observable {
 	 * Balance is total money in the purse.
 	 */
 	private double balance;
+	/**
+	 * Currency of the money
+	 */
+	private String currency;
 
 	/**
 	 * Create a purse with a specified capacity.
 	 * @param capacity
 	 *            is maximum number of monetary objects you can put in purse.
 	 */
-	public Purse(int capacity) {
+	public Purse(int capacity, String currency) {
 		this.capacity = capacity;
+		this.currency = currency;
 		money = new ArrayList<Valuable>();
 		this.balance = 0.0;
 
@@ -65,6 +70,15 @@ public class Purse extends Observable {
 		return this.capacity;
 	}
 
+	/**
+	 * Return the currency of the purse.
+	 * 
+	 * @return the currency
+	 */
+	public String getCurrency() {
+		return this.currency;
+	}
+	
 	/**
 	 * Test whether the purse is full. The purse is full if number of items in
 	 * purse equals or greater than the purse capacity.
@@ -156,6 +170,10 @@ public class Purse extends Observable {
 		return count() + " items with value " + this.balance;
 	}
 	
+	/**
+	 * Methods for getting immutable list of items in the purse.
+	 * @return immutable list of items in the purse.
+	 */
 	public List<Valuable> immutableList(){
 		return Collections.unmodifiableList(money);
 	}

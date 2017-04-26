@@ -11,6 +11,12 @@ import javax.swing.table.TableModel;
 
 import coinpurse.*;
 
+/**
+ * This class is an observer that provides a TableModel interface for showing the transactions of the
+ * purse. 
+ * @author Vittunyuta Maeprasart
+ *
+ */
 public class PurseTransactionsTable extends AbstractTableModel implements Observer {
 	private JFrame frame;
 	private JTable table;
@@ -21,12 +27,19 @@ public class PurseTransactionsTable extends AbstractTableModel implements Observ
 	private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	private Date date;
 
+	/**
+	 * Initialize view of transactions of the purse.
+	 * @param purse of Purse class
+	 */
 	public PurseTransactionsTable(Purse purse) {
 		this.purse = purse;
 		rows = new ArrayList<>(); 
 		frame = new JFrame("Purse Transactions");
 	}
 
+	/**
+	 * create the components
+	 */
 	private void initComponents() {
 		model = new PurseTransactionsTable(purse);
 		
@@ -47,31 +60,54 @@ public class PurseTransactionsTable extends AbstractTableModel implements Observ
 		frame.pack();
 	}
 	
+	/**
+	 * run the view
+	 */
 	public void run() {
 		initComponents();
 		frame.setVisible(true);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see javax.swing.table.AbstractTableModel#getColumnName(int)
+	 */
 	@Override
 	public String getColumnName(int column) {
 		return headerRow[column];
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see javax.swing.table.TableModel#getRowCount()
+	 */
 	@Override
 	public int getRowCount() {
 		return rows.size();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see javax.swing.table.TableModel#getColumnCount()
+	 */
 	@Override
 	public int getColumnCount() {
 		return 3;
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see javax.swing.table.TableModel#getValueAt(int, int)
+	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		return rows.get(rowIndex)[columnIndex];
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable subject, Object info) {
 		if (subject instanceof Purse) {

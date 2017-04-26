@@ -14,6 +14,7 @@ import gui.PurseTransactionsTable;
  */
 public class Main{
 	private static int CAPACITY = 10;
+	private static String currency;
     /**
      * Configure and start the application.
      * @param args not used
@@ -37,11 +38,12 @@ public class Main{
 			System.exit(1);
 		else {
 			MoneyFactory.setMoneyFactory(theMoneyFactory);
+			currency = theMoneyFactory.getDEFAULT_CURRENCY();
 		}
 		
     // 1. create a Purse
-    	Purse purse = new Purse(CAPACITY);
-    // 2. add observer
+    	Purse purse = new Purse(CAPACITY,currency);
+    // 2. add observers
     	PurseBalanceObserver balanceObserver = new PurseBalanceObserver();
     	purse.addObserver(balanceObserver);
     	PurseStatusObserver statusObserver = new PurseStatusObserver();

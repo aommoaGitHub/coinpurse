@@ -7,8 +7,8 @@ import javax.swing.*;
 import coinpurse.*;
 
 /**
- * This class provides a ListModel interface for querying the content of the
- * purse. It is a kind of adapter.
+ * This class is an observer that provides a ListModel interface for showing the contents of the
+ * purse. 
  * 
  * @author Vittunyuta Maeprasart
  *
@@ -21,6 +21,10 @@ public class PurseListModel extends AbstractListModel<Valuable> implements Obser
 	private JList<Valuable> listview;
 	private JFrame frame;
 
+	/**
+	 * Initialize view the contents of the purse.
+	 * @param purse of Purse class
+	 */
 	public PurseListModel(Purse purse) {
 		this.purse = purse;
 		this.size = 0;
@@ -28,6 +32,9 @@ public class PurseListModel extends AbstractListModel<Valuable> implements Obser
 		frame = new JFrame("Purse Contents");
 	}
 
+	/**
+	 * create the components
+	 */
 	private void initComponents() {
 		this.listModel = new PurseListModel(purse);
 		this.listview = new JList<>(listModel);
@@ -38,22 +45,37 @@ public class PurseListModel extends AbstractListModel<Valuable> implements Obser
 		frame.pack();
 	}
 
+	/**
+	 * run the view
+	 */
 	public void run() {
 		initComponents();
 		frame.setVisible(true);
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see javax.swing.ListModel#getSize()
+	 */
 	@Override
 	public int getSize() {
 		return purse.count();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see javax.swing.ListModel#getElementAt(int)
+	 */
 	@Override
 	public Valuable getElementAt(int index) {
 		return moneyList.get(index);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable subject, Object info) {
 		if (subject instanceof Purse) {

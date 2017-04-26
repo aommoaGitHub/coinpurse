@@ -46,5 +46,14 @@ public class MalayMoneyFactory extends MoneyFactory {
 		Valuable mValuable2 = factory.createMoney(1000.0); 
 		System.out.println(mValuable2.toString()); //throw IllegalArgumentException
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see coinpurse.MoneyFactory#getDEFAULT_CURRENCY()
+	 */
+	@Override
+	public String getDEFAULT_CURRENCY() {
+		return DEFAULT_CURRENCY;
+	}
 
 }

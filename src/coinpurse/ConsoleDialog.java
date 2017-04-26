@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class ConsoleDialog {
 	// default currency for this dialog
-	public static final String CURRENCY = "Baht";
+	public static String CURRENCY;
     // use a single java.util.Scanner object for reading all input
     private static Scanner console = new Scanner( System.in );
     
@@ -24,6 +24,7 @@ public class ConsoleDialog {
      */
     public ConsoleDialog(Purse purse) {
     	this.purse = purse;
+    	CURRENCY = purse.getCurrency();
 
     }
     
@@ -73,7 +74,7 @@ public class ConsoleDialog {
             System.out.println("Invalid input: "+scanline.next() );
     }
     
-    /** Ask how much money (Baht) to withdraw and then do it.
+    /** Ask how much money to withdraw and then do it.
      *  After withdraw, show the values of the monetary objects we withdrew.
      */
     public void withdrawDialog() {

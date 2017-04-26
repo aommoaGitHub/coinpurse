@@ -1,6 +1,5 @@
 package coinpurse;
 
-import java.util.ResourceBundle;
 /**
  * Main factory choose which country factory to create money.
  * 
@@ -59,4 +58,10 @@ public abstract class MoneyFactory {
 		}
 		return false;
 	}
+	
+	/**
+	 * get currency of the money
+	 * @return currency of the money
+	 */
+	public abstract String getDEFAULT_CURRENCY() ;
 }
