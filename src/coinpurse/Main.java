@@ -55,10 +55,10 @@ public class Main{
     // 3. create a ConsoleDialog with a reference to the Purse object
     	ConsoleDialog ui = new ConsoleDialog(purse);
     // 4. run the ConsoleDialog
-    	balanceObserver.run();
-    	statusObserver.run();
-    	purseListModel.run();
     	purseTransactionsTable.run();
+    	purseListModel.run();
+    	statusObserver.run();
+    	balanceObserver.run();
     	ui.run();
 
  

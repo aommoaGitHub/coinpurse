@@ -19,3 +19,7 @@ Lab4 on 17 Feb 2017
 * The purse can add more kind of monetary objects. Example is BankNote class.
 * Created an interface, Valuable interface for getting value and currency of monetory objects.
 * Pratice using polymorphism.
+*****
+Lab10 on 21 April 2017
+* Create 4 view of the purse for showing balance, status, contents(items), and transactions.
+* Using Observer Pattern.

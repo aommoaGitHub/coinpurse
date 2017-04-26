@@ -28,7 +28,7 @@ public class PurseBalanceObserver extends JFrame implements Observer {
 	 * create the components
 	 */
 	private void initComponents() {
-		label = new JLabel("      0 Baht      ");
+		label = new JLabel("           0           ",SwingConstants.CENTER);
 		label.setFont(new Font(Font.DIALOG, Font.PLAIN, 24));
 		label.setAlignmentX(CENTER_ALIGNMENT);
 		this.add(label);
@@ -53,7 +53,7 @@ public class PurseBalanceObserver extends JFrame implements Observer {
 	public void update(Observable subject, Object info) {
 		if (subject instanceof Purse) {
 			Purse purse = (Purse) subject;
-			label.setText("   "+purse.getBalance() + " Baht   \n");
+			label.setText("   "+purse.getBalance() + " "+purse.getCurrency()+"   \n");
 			this.pack();
 		}
 		
