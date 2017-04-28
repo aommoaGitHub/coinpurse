@@ -17,7 +17,7 @@ public class PurseListModel extends AbstractListModel<Valuable> implements Obser
 	private Purse purse;
 	private int size;
 	private List<Valuable> moneyList;
-	private ListModel<Valuable> listModel;
+//	private ListModel<Valuable> listModel;
 	private JList<Valuable> listview;
 	private JFrame frame;
 
@@ -36,8 +36,8 @@ public class PurseListModel extends AbstractListModel<Valuable> implements Obser
 	 * create the components
 	 */
 	private void initComponents() {
-		this.listModel = new PurseListModel(purse);
-		this.listview = new JList<>(listModel);
+//		this.listModel = new PurseListModel(purse);
+		this.listview = new JList<>(this);
 		JScrollPane pane = new JScrollPane(listview);
 		pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
@@ -82,8 +82,8 @@ public class PurseListModel extends AbstractListModel<Valuable> implements Obser
 			size = getSize();
 			fireContentsChanged(this, 0, size - 1);
 			
-			Valuable[] valArray = moneyList.toArray(new Valuable[0]);
-			listview.setListData(valArray);
+//			Valuable[] valArray = moneyList.toArray(new Valuable[0]);
+//			listview.setListData(valArray);
 			
 //			listview.setModel(this);
 		}

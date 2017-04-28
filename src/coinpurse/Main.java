@@ -6,6 +6,8 @@ import gui.PurseBalanceObserver;
 import gui.PurseListModel;
 import gui.PurseStatusObserver;
 import gui.PurseTransactionsTable;
+import strategy.GreedyWithdraw;
+import strategy.RecursiveWithdraw;
 
 /**
  * A main class to create objects and connect objects together.
@@ -43,6 +45,8 @@ public class Main{
 		
     // 1. create a Purse
     	Purse purse = new Purse(CAPACITY,currency);
+//    	purse.setWithdrawStrategy(new GreedyWithdraw());
+    	purse.setWithdrawStrategy(new RecursiveWithdraw());
     // 2. add observers
     	PurseBalanceObserver balanceObserver = new PurseBalanceObserver();
     	purse.addObserver(balanceObserver);
