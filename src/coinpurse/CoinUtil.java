@@ -1,7 +1,7 @@
 package coinpurse;
 
 import java.util.*;
-import java.util.stream.Collector;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -23,13 +23,17 @@ public class CoinUtil {
 	 *         the requested currency.
 	 */
 	public static List<Valuable> filterByCurrency(final List<? extends Valuable> monetarylist, String currency) {
-		List<Valuable> vals = new ArrayList<Valuable>();
-		for (Valuable vallist : monetarylist) {
-			if (vallist.getCurrency().equals(currency)) {
-				vals.add(vallist);
-			}
-		}
-		return vals; // return a list of monetary objects references copied from monetarylist
+//		List<Valuable> vals = new ArrayList<Valuable>();
+//		for (Valuable vallist : monetarylist) {
+//			if (vallist.getCurrency().equals(currency)) {
+//				vals.add(vallist);
+//			}
+//		}
+//		return vals; // return a list of monetary objects references copied from monetarylist
+	
+		Predicate<Valuable> currencyFilter = (vals) -> (vals.getCurrency().equals(currency));
+		return monetarylist.stream().filter(currencyFilter).collect(Collectors.toList());
+	
 	}
 
 	/**
@@ -149,4 +153,15 @@ public class CoinUtil {
 		}
 		System.out.println(); // end the line
 	}
+	
+	/**
+	 * Return the larger of a and b, according to the natural ordering (defined by compareTo)
+	 */
+	public static <E extends Comparable<? super E>> E max (E ... a){		
+		List<E> aE = Arrays.asList(a);
+		return aE.stream().max((o1,o2)->(o1.compareTo(o2))).get();
+		
+	}
+
+	
 }
